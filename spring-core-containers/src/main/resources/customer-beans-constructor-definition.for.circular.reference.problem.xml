@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+	
+	<bean class="com.weshopify.feature.customer.custructor.di.circular.reference.with.proxy.solution.CustomerBean" id="customer">
+		<constructor-arg name="id" value="123"></constructor-arg>
+		<constructor-arg name="firstName" value="Riddhi"></constructor-arg>
+		<constructor-arg name="lastName" value="Shah"></constructor-arg>
+		<constructor-arg name="email" value="r@gmail.com"></constructor-arg>
+		<constructor-arg name="mobileNo" value="123456789"></constructor-arg>
+		<constructor-arg name="homeLoanAccount">
+			<ref bean="homeLoanAccount"/>
+		</constructor-arg>
+		<constructor-arg name="props">
+			<props>
+				<prop key="PAN_CARD">1234567</prop>
+				<prop key="ADHAR_CARD">34678</prop>
+			</props>
+		</constructor-arg>
+		<constructor-arg name="loanCodes">
+			<map>
+				<entry key="Personal Loan" value="PL"></entry>
+				<entry key="Home Loan" value="HL"></entry>
+			</map>
+		</constructor-arg>
+		<constructor-arg name="accounts">
+			<list>
+				<value>PL-198712</value>
+				<value>HL-909900</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg name="loanTypes">
+		<set>
+			<value>Personal Loan</value>
+			<value>Home Loan</value>
+		</set>
+		</constructor-arg>
+	</bean> 
+	<bean class="com.weshopify.feature.customer.custructor.di.circular.reference.with.proxy.solution.HomeLoanAccount" id="homeLoanAccount" lazy-init="false">
+	<property name="customerBean">
+			<ref bean="customer"/>
+		</property>
+		<property name="loanNumber" value="213"></property>
+		<property name="loanAmt" value="24000"></property>
+		<!-- <constructor-arg name="loanNumber" value="213"></constructor-arg>
+		<constructor-arg name="loanAmt" value="24000"></constructor-arg> -->
+	</bean>
+</beans>

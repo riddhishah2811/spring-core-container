@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- schema/.. & schema/beans/....xsd both xsi needs to be together.-->
+<!-- Always remember to add the "beans/ in the xmlns otherwise it will give the error of "matching wildcard" at the <context:annotation-config>" -->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:aop="http://www.springframework.org/schema/aop" 
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+classpath:/org/springframework/beans/factory/xml/spring-beans-4.0.xsd 
+http://www.springframework.org/schema/context 
+classpath:/org/springframework/context/config/spring-context-4.0.xsd
+">
+    <!-- bean definitions here -->
+
+<!-- Setter Enjection allow the partial dependency whereas constructor injection is not allowing the partial dependency. So, Setter injection is a mutable whereas constructor injection is the immutable. -->
+
+<!-- This below bean tag is for the autowire attribute -->
+	<!-- <bean class="com.weshopify.feature.customer.autowire.CustomerBean" autowire="default"> -->
+
+	<!-- This below bean tag is for @Autowired annotation -->	
+	<!--This below config annotation register the annotationsinside the IOC.  -->
+	<context:annotation-config />
+	<!-- Here below tag is used when we don't want to specify the beans then 1) We can add the component tag with base-package name 2) Add @Component at class level of that package class 3) @Autowired works as is.
+	   4) We can give different base-packages with comma sepration 5) No need to use the above config tag boz this below component tag is also supporting the above config tag.-->
+	<context:component-scan base-package="com.weshopify.feature.customer.autowire"></context:component-scan>
+	
+	
+	<!-- <bean class="com.weshopify.feature.customer.autowire.CustomerBean">
+		<property name="id" value="1"></property>
+		<property name="firstName" value="Riddhi"></property>
+		<property name="lastName" value="Shah"></property>
+		<property name="email" value="r@gmail.com"></property>
+		<property name="mobileNo" value="123456789"></property>
+		<property name="loanList">
+		<list>
+			<value>HL-1234</value>
+			<value>PL-1234</value>
+		</list>
+		</property>
+		<property name="accSet">
+		<set>
+			<value>ACC-100</value>
+			<value>ACC-200</value>
+		</set>
+		</property>
+		<property name="custData">
+		<map>
+		<entry key="100" value="James"/>
+		<entry key="200" value="Tames"/>
+		</map>
+		</property>
+		<property name="aditionalInfo">
+		<props>
+		<prop key="PAN_NUUMBER">123456789</prop>
+		<prop key="ADHAR_NUUMBER">123456789</prop>
+		</props>
+		</property>
+		<property name="homeLoanAccount" ref="homeLoanAccount"></property>
+	</bean>
+	
+	byName : Same id name as the object name into the CustomerBean class 
+	byType : customerBean property HomeLoanAccount type is matching with the class name HomeLoanAccount 
+	                id in HomeLoanAccount is also not necessary..
+     constructor : We can specify the constructor of HomeLoanAccount into the CustomerBean class. So, hat we don't need to create the <constructor-arg> into the CustomerBean class.
+     default : It is look for the setter injection by default.
+     
+     
+	<bean class="com.weshopify.feature.customer.autowire.HomeLoanAccount" id="homeLoanAccount">
+		<property name="loanNumber" value="213"></property>
+		<property name="loanAmt" value="24000"></property>
+	</bean> -->
+</beans>

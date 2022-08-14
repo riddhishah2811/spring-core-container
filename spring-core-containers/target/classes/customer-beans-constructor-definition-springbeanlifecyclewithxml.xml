@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+<!-- Setter injection allow the partial dependency whereas constructor injection is not allowing the partial dependency. So, Setter injection is a mutable whereas constructor injection is the immutable. -->
+	<bean class="com.weshopify.core.customized.springbeanlifecyclewithxml.CustomerBean" init-method="afterPropertiesSet" destroy-method="destroy">
+		
+		<property name="email" value="r@gmail.com"></property>
+		<constructor-arg name="homeLoanAccount" ref="homeLoanAccount"></constructor-arg>
+	</bean>
+	<bean class="com.weshopify.core.customized.springbeanlifecyclewithxml.HomeLoanAccount" id="homeLoanAccount">
+		<property name="loanNumber" value="213"></property>
+		<property name="loanAmt" value="24000"></property>
+	</bean>
+</beans>

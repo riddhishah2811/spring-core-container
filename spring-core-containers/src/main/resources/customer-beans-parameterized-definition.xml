@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+<!-- Setter Enjection allow the partial dependency whereas constructor injection is not allowing the partial dependency. So, Setter injection is a mutable whereas constructor injection is the immutable. -->
+	<bean class="com.weshopify.feature.customer.parameterized.di.CustomerBean">
+		<property name="id" value="1"></property>
+		<property name="firstName" value="Riddhi"></property>
+		<property name="lastName" value="Shah"></property>
+		<property name="email" value="r@gmail.com"></property>
+		<!-- <property name="mobileNo" value="123456789"></property> -->
+		<property name="loanList">
+		<list>
+			<value>HL-1234</value>
+			<value>PL-1234</value>
+		</list>
+		</property>
+		<property name="accSet">
+		<set>
+			<value>ACC-100</value>
+			<value>ACC-200</value>
+		</set>
+		</property>
+		<property name="custData">
+		<map>
+		<entry key="100" value="James"/>
+		<entry key="200" value="Tames"/>
+		</map>
+		</property>
+		<property name="aditionalInfo">
+		<props>
+		<prop key="PAN_NUUMBER">123456789</prop>
+		<prop key="ADHAR_NUUMBER">123456789</prop>
+		</props>
+		</property>
+		<property name="homeLoanAccount" ref="homeLoanAccount"></property>
+	</bean>
+	<bean class="com.weshopify.feature.customer.parameterized.di.HomeLoanAccount" id="homeLoanAccount">
+		<property name="loanNumber" value="213"></property>
+		<property name="loanAmt" value="24000"></property>
+	</bean>
+</beans>
